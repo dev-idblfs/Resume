@@ -4,26 +4,35 @@ var path = require("path");
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+var admin = require("firebase-admin");
+var serviceAccount = require("./node-b629b-firebase-adminsdk-rhm20-26be41513b.json");
+
+app.set('view engine', 'ejs')
+
+app.use('views', express.static(path.join(__dirname, 'views')))
+app.use(express.static('assets'));
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://node-b629b.firebaseio.com"
+});
 
 
-app.get('/', function(req, res) {
+
+
+app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname + "/" + "index.html"));
-    app.use(express.static('assets'));
+});
+
+app.get('/avi', function (req, res) {
+    res.render('welcome');
 });
 
 var a = false;
-app.post('/submit', function(req, res) {
+app.post('/submit', function (req, res) {
     a = true;
 
     var email = req.body.email;
     var dt = new Date().toString();
-    var admin = require("firebase-admin");
-    var serviceAccount = require("./node-b629b-firebase-adminsdk-rhm20-26be41513b.json");
-
-    admin.initializeApp({
-        credential: admin.credential.cert(serviceAccount),
-        databaseURL: "https://node-b629b.firebaseio.com"
-    });
 
 
     // Get a database reference to our blog
@@ -44,20 +53,9 @@ app.post('/submit', function(req, res) {
             Date_Time: dt,
         },
     });
-    //res.write('You sent the email "' + req.body.email + '".\n');
-    //console.log("Record !!!!");
-    //return res.redirect('http://localhost:3000/welcome.htmll');
-    res.end();
-    //res.redirect('/submit/welcome.html');
-
+    res.send({ res: "ok" });
 });
-if (a == true) {
-    app.get('/avi/', function(req, res) {
-        res.sendFile(path.join(__dirname + "/" + "welcome.html"));
-        app.use(express.static('assets'));
-    });
 
-}
 
 
 
