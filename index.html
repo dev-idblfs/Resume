@@ -14,9 +14,7 @@
     <link href="/img/apple-touch-icon.png" rel="apple-touch-icon">
 
     <!-- Google Fonts -->
-    <link
-        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -81,8 +79,7 @@
                     <div class="col-md-4"></div>
                     <div class="col-md-8 align-content-center">
                         <div class="input-group mb-3 pl-1 pr-1">
-                            <input type="email" name="email" class="form-control" size="45" placeholder="Email ID"
-                                aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <input type="email" name="email" class="form-control" size="45" placeholder="Email ID" aria-label="Recipient's username" aria-describedby="basic-addon2">
                             <div class="input-group-append pl-1 pr-1 ">
                                 <span class="input-group-text" id="basic-addon2">&nbsp;&nbsp; Only Gmail ID
                                     &nbsp;&nbsp;</span>
@@ -96,14 +93,6 @@
                     </div>
                 </div>
             </form>
-
-            <form action="/go" method="GET">
-
-                <br>
-                <b><input type="submit" value="Save" class="btn btn-info btn-lg"></b>
-                <br>
-            </form>
-
         </div>
     </section>
 
@@ -144,15 +133,15 @@
     <!-- Template Main JS File -->
     <script src="/js/main.js"></script>
     <script>
-        document.body.onload = function () {
-            $('#submit').click(function () {
+        document.body.onload = function() {
+            $('#submit').click(function() {
                 $.ajax({
                     type: 'POST',
                     data: {
                         email: $('input[name=email]').val()
                     },
                     url: "submit",
-                    success: function (result) {
+                    success: function(result) {
                         if (result.res == 'ok') {
                             location.href = 'http://localhost:3000/avi';
                         }
